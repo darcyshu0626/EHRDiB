@@ -1,0 +1,60 @@
+{
+  "model": "<model_name>",
+  "dataset": "mimic",
+  "seed": "<experiment_seed>",
+  "task": "<task>",
+  "decoder": "<decoding_method>",
+
+  "data": {
+    "samples": {"train": "<sample_count>", "validation": "<sample_count>", "test": "<sample_count>"},
+    "features": {
+      "diagnosis": {"binary_dim": "<dimension>"},
+      "procedure": {"binary_dim": "<dimension>"},
+      "medication": {"binary_dim": "<dimension>"},
+      "clinical_measurement": {"categorical_dim": "<dimension>", "numerical_dim": "<dimension>"}
+    }
+  },
+
+  "fidelity": {
+    "FDD": "<score_or_null>", "BCMD": "<score_or_null>",
+    "modalities": {
+      "diagnosis": {"FDD": "<score_or_null>"},
+      "procedure": {"FDD": "<score_or_null>"},
+      "medication": {"FDD": "<score_or_null>"},
+      "clinical_measurement": {"FDD": "<score_or_null>"}
+    }
+  },
+
+  "diversity": {
+    "APDR": "<score_or_null>", "Coverage": "<score_or_null>",
+    "pca": "<configured_boolean>", "pca_dim": "<effective_dimension_or_null>"
+  },
+
+  "utility": {
+    "cohort_a": {
+      "TRTR_AUROC": "<score_or_null>", "TSTR_AUROC": "<score_or_null>", "delta_AUROC": "<score_or_null>",
+      "TRTR_AUPRC": "<score_or_null>", "TSTR_AUPRC": "<score_or_null>", "delta_AUPRC": "<score_or_null>",
+
+      "phenotypes": {
+        "<diagnosis_code>": {
+          "TRTR_AUROC": "<score_or_null>", "TSTR_AUROC": "<score_or_null>", "delta_AUROC": "<score_or_null>",
+          "TRTR_AUPRC": "<score_or_null>", "TSTR_AUPRC": "<score_or_null>", "delta_AUPRC": "<score_or_null>"
+        }
+      }
+    },
+
+    "cohort_b": {
+      "TRTR_AUROC": "<score_or_null>", "TSTR_AUROC": "<score_or_null>", "delta_AUROC": "<score_or_null>",
+      "TRTR_AUPRC": "<score_or_null>", "TSTR_AUPRC": "<score_or_null>", "delta_AUPRC": "<score_or_null>",
+
+      "phenotypes": {
+        "<diagnosis_code>": {
+          "TRTR_AUROC": "<score_or_null>", "TSTR_AUROC": "<score_or_null>", "delta_AUROC": "<score_or_null>",
+          "TRTR_AUPRC": "<score_or_null>", "TSTR_AUPRC": "<score_or_null>", "delta_AUPRC": "<score_or_null>"
+        }
+      }
+    }
+  },
+
+  "privacy": {"MIA-AUROC": "<value>", "delta_AIA-AUPRC": "<value>"}
+}

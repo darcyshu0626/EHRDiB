@@ -1,0 +1,65 @@
+dataset: mimic
+name: mimic_synthesis
+
+paths:
+  data_dir: /hpc/group/honglab/ss1688/mimic_data/{seed}/mimic.pt
+
+runtime:
+  seed: 2026
+  task: synthesis  # Options: synthesis, completion.
+
+evidence:
+  known_ratio_min: 0.1
+  known_ratio_max: 0.5
+
+vae:
+  latent_dim: 384
+  encoder_hidden_dims: [512, 512, 384]
+  decoder_hidden_dims: [384, 512, 512]
+  dropout: 0.1
+  steps: 50000
+  batch_size: 2048
+  learning_rate: 0.0005
+  weight_decay: 1.0e-05
+  kl_weight: 1.0e-05
+  kl_warmup_steps: 20000
+  eval_every: 500
+  save_every: 1000
+
+latent:
+  batch_size: 4096
+
+bridge:
+  beta_min: 0.1
+  beta_peak: 0.3
+  data_scale: 0.5
+  evidence_scale: 0.5
+  covariance: 0
+  endpoint_noise: 0.5  # Use 0 for completion.
+  time_min: 0.0001
+  time_max: 1.0
+  hidden_dims: [1024, 512, 384, 384, 384, 512, 1024]
+  time_dim: 384
+  dropout: 0.05
+  time_film: false  # Options: true, false.
+  evidence_film: true  # Options: true, false.
+  steps: 200000
+  batch_size: 1024
+  learning_rate: 0.0005
+  weight_decay: 0
+  ema_rate: 0.9999
+  eval_every: 1000
+  save_every: 2000
+
+sampling:
+  batch_size: 4096
+  steps: 128
+  rho: 7
+  churn_ratio: 0.25
+
+decoding:
+  methods: [bernoulli, calibrated_threshold]
+
+evaluation:
+  pca: true  # Options: true, false.
+  pca_dim: 32  # Used only when pca is true.

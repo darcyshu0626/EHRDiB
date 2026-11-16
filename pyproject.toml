@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ehrdib"
+version = "0.1.0.dev2"
+description = "Schema-driven heterogeneous clinical generation with latent diffusion bridges"
+requires-python = ">=3.10"
+dependencies = ["torch>=2.2,<3", "numpy>=1.26,<3", "scikit-learn>=1.4,<2", "scipy>=1.11,<2", "lightgbm>=4,<5", "PyYAML>=6,<7", "pandas>=2.1,<3", "lifelines>=0.30,<0.31", "duckdb>=1,<2"]
+
+[project.optional-dependencies]
+dev = ["ruff>=0.9,<1"]
+
+[project.scripts]
+ehrdib = "ehrdib.run:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ehrdib", "ehrdib.*", "datasets", "datasets.*"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "B"]

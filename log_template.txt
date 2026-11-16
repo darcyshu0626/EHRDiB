@@ -1,0 +1,57 @@
+============================================================
+Environment: <environment_name>
+============================================================
+  Environment ready
+
+============================================================
+Experiment: <experiment_name>
+============================================================
+  Dataset: <dataset> | Seed: <seed> | Device: <device>
+  Task: <task> | Decoder: <ehrdib_decoder>
+  Project: <project_path>
+  Data: <input_path>
+  Config: <config_path>
+
+============================================================
+Data preprocessing
+============================================================
+  Rows: train=<count> | validation=<count> | test=<count>
+  Features: diagnosis=<dim> | procedure=<dim> | medication=<dim> | clinical measurement=cat <dim>, num <dim>
+
+============================================================
+Model training
+============================================================
+  <model-specific training stages and progress>
+  <native epoch/step, objectives, validation and checkpoint output>
+
+============================================================
+Data generation
+============================================================
+  <model-specific sampling progress; train/test are details within this stage>
+  Saved: <synthesis_path>
+
+============================================================
+Evaluation
+============================================================
+  Decoder: <ehrdib_decoder; repeat the following block for each decoder>
+  Fidelity | FDD: <value> | BCMD: <value>
+  Diversity | APDR: <value> | Coverage: <value>
+  Utility
+    Cohort A
+      AUROC | TRTR: <value> | TSTR: <value> | delta: <value>
+      AUPRC | TRTR: <value> | TSTR: <value> | delta: <value>
+    Cohort B
+      AUROC | TRTR: <value> | TSTR: <value> | delta: <value>
+      AUPRC | TRTR: <value> | TSTR: <value> | delta: <value>
+  Privacy | MIA-AUROC: <value> | delta_AIA-AUPRC: <value>
+  Saved: <report_path>
+
+Template scope: MIMIC. Duke omits procedure and Cohort B.
+Baseline experiments omit Decoder; EHRDiB retains it.
+For both decoders, Evaluation contains Bernoulli then calibrated_threshold blocks and one Saved footer.
+Model training preserves native objectives and necessary internal stages.
+EHRDiB internal stages: VAE training, Latent encoding, Bridge training.
+Utility logs show cohort summaries only; per-diagnosis scores remain in the report.
+Unavailable scores are printed as N/A.
+Environment preparation and experiment submission belong to the launcher job.
+No separate train/test generation headings or completion heading are emitted.

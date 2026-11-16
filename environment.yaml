@@ -1,0 +1,25 @@
+name: ehrdib
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - setuptools>=68
+  - wheel
+  - numpy>=1.26,<3
+  - scipy>=1.11,<2
+  - scikit-learn>=1.4,<2
+  - lightgbm>=4,<5
+  - pandas>=2.1,<3
+  - lifelines>=0.30,<0.31
+  - pyyaml>=6,<7
+  - duckdb>=1,<2
+  - libgcc-ng>=13
+  - libstdcxx-ng>=13
+  - pytorch>=2.2,<3
+  - pytorch-cuda=12.1
+  - pip:
+      - -e .
